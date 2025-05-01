@@ -13,6 +13,14 @@ class UMeshComponent;
 class APawn;
 class UCameraComponent;
 
+UENUM(BlueprintType, Category = "OnRails")
+enum class ESplineDirection :uint8
+{
+	X,
+	Y,
+	Z
+};
+
 UCLASS()
 class PLATFORMER2D3D_API AOnRailsPlatformActor : public AActor
 {
@@ -26,9 +34,16 @@ public:
 
 	virtual void OnConstruction(const FTransform& Transform) override;
 
+	// Tells the Camera Rig which axis to follow based on how far
+	// the Pawn has moved on the Platform Mesh Spline
+	UFUNCTION(BlueprintCallable, Category = "OnRails")
+	void SetCameraRigFollowDirection(ESplineDirection splineDir);
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	FVector GetForwardSplineDirection();
 
 private:
 	TArray<USplineMeshComponent*> platformMeshCollection;
@@ -51,4 +66,7 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "OnRails")
 	bool bFollowPawn;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "OnRails")
+	ESplineDirection splineDirection;
 };
