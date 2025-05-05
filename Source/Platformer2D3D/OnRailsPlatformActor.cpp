@@ -31,31 +31,6 @@ void AOnRailsPlatformActor::BeginPlay()
 	
 }
 
-FVector AOnRailsPlatformActor::GetForwardSplineDirection()
-{
-	FVector result;
-
-	switch (splineDirection)
-	{
-	case ESplineDirection::X:
-		result = FVector::ForwardVector;
-		break;
-
-	case ESplineDirection::Y:
-		result = FVector::RightVector;
-		break;
-
-	case ESplineDirection::Z:
-		result = FVector::UpVector;
-		break;
-
-	default:
-		result = FVector::ForwardVector;
-		break;
-	}
-	return result;
-}
-
 // Called every frame
 void AOnRailsPlatformActor::Tick(float DeltaTime)
 {
@@ -70,7 +45,6 @@ void AOnRailsPlatformActor::OnConstruction(const FTransform& Transform)
 	for (int32 i = 0; i < meshPoints; ++i)
 	{
 		USplineMeshComponent* platformInst = NewObject<USplineMeshComponent>(this, USplineMeshComponent::StaticClass());
-		
 		platformInst->SetStaticMesh(meshInstance);
 		platformInst->SetMobility(EComponentMobility::Movable);
 		platformInst->CreationMethod = EComponentCreationMethod::SimpleConstructionScript;

@@ -13,13 +13,7 @@ class UMeshComponent;
 class APawn;
 class UCameraComponent;
 
-UENUM(BlueprintType, Category = "OnRails")
-enum class ESplineDirection :uint8
-{
-	X,
-	Y,
-	Z
-};
+
 
 UCLASS()
 class PLATFORMER2D3D_API AOnRailsPlatformActor : public AActor
@@ -43,7 +37,6 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	FVector GetForwardSplineDirection();
 
 private:
 	TArray<USplineMeshComponent*> platformMeshCollection;
@@ -66,7 +59,5 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "OnRails")
 	bool bFollowPawn;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "OnRails")
-	ESplineDirection splineDirection;
+	
 };
