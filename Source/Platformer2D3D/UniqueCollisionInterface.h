@@ -7,10 +7,10 @@
 #include "UniqueCollisionInterface.generated.h"
 
 // This class does not need to be modified.
-UINTERFACE(MinimalAPI)
+UINTERFACE(MinimalAPI, Blueprintable)
 class UUniqueCollisionInterface : public UInterface
 {
-	GENERATED_BODY()
+	GENERATED_UINTERFACE_BODY()
 };
 
 /**
@@ -18,12 +18,14 @@ class UUniqueCollisionInterface : public UInterface
  */
 class PLATFORMER2D3D_API IUniqueCollisionInterface
 {
-	GENERATED_BODY()
+	GENERATED_IINTERFACE_BODY()
 
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
-	bool IsOneSided();
-	void SetOneSidedCollision(bool sided);
-private:
-	bool oneSided = false;
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent,  Category= "UniqueCollision")
+	void ActivateCollision();
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent,  Category= "UniqueCollision")
+	void DeactivateCollision();
+
+
 };
