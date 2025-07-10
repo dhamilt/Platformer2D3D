@@ -48,7 +48,7 @@ protected:
 public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "2.5D Character")
-	FRotator orientationOffset;
+	float orientationOffset;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "2.5D Character")
 	FVector positionOffset;
@@ -65,15 +65,8 @@ public:
 	UInputMappingContext* mappingContext;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "2.5D Character")
-	float characterSpeed;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "OnRails")
-	TObjectPtr<UCameraComponent> followCamera;
-
-	// Reference to spline for camera rig pathing
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "OnRails")
-	TSoftObjectPtr<USplineComponent> cameraSplineRef;
-
+	float characterSpeed  = 10;
+	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "OnRails")
 	TSoftObjectPtr<USplineComponent> platformSplineRef;
 };

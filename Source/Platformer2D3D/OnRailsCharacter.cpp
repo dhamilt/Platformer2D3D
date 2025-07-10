@@ -22,14 +22,8 @@ AOnRailsCharacter::AOnRailsCharacter()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	cameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("Camera Boom"));
-	cameraBoom->SetupAttachment(RootComponent);
 
-	followCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("Follow Camera"));
-	followCamera->SetupAttachment(cameraBoom, USpringArmComponent::SocketName);
 	
-	/*const FDetachmentTransformRules detachmentRule(EDetachmentRule::KeepWorld, true);
-	cameraBoom->DetachFromComponent(detachmentRule);*/
 }
 
 void AOnRailsCharacter::OnConstruction(const FTransform& transform)
@@ -40,7 +34,6 @@ void AOnRailsCharacter::OnConstruction(const FTransform& transform)
 	if (!actors.IsEmpty())
 	{
 		AOnRailsPlatformActor* temp = Cast<AOnRailsPlatformActor>(actors[0]);
-		cameraSplineRef = temp->railsSpline;
 		platformSplineRef = temp->platformMeshSpline;
 	}
 
@@ -53,17 +46,12 @@ void AOnRailsCharacter::BeginPlay()
 	FVector startPosition = platformSplineRef.Get()->GetLocationAtSplinePoint(0, ESplineCoordinateSpace::World);
 	startPosition += positionOffset;
 	SetActorLocation(startPosition);
-
-	int32 numOfSplinePoints = cameraSplineRef.Get()->GetNumberOfSplinePoints();
-	FVector startCameraPosition = cameraSplineRef.Get()->GetLocationAtSplinePoint(0, ESplineCoordinateSpace::World);
-	cameraBoom->SetWorldLocation(startCameraPosition);
+		
 	
 	maxSplineDist = platformSplineRef.Get()->GetSplineLength();
 
 	if (APlayerController* playerController = Cast<APlayerController>(GetController()))
 	{
-		// Set to static camera
-		playerController->SetViewTargetWithBlend(this, 0.0);
 		// Add input mapping context to player
 		if (UEnhancedInputLocalPlayerSubsystem* enhancedInputSubsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(playerController->GetLocalPlayer()))
 			enhancedInputSubsystem->AddMappingContext(inputMappingCxt, 0);
@@ -107,15 +95,7 @@ void AOnRailsCharacter::Move(const FInputActionValue& value)
 		dir.Normalize();
 		
 		AddMovementInput(dir,  characterSpeed* 7500);
-		GetMesh()->SetWorldRotation(playerRotWithOffset);
-		// Move camera on rails
-		FVector cameraLocation = cameraSplineRef.Get()->GetLocationAtDistanceAlongSpline(distanceOnSpline * 0.995f, ESplineCoordinateSpace::World);
-		FVector cameraTangent = cameraSplineRef.Get()->GetTangentAtDistanceAlongSpline(distanceOnSpline * 0.995f, ESplineCoordinateSpace::World);
-		FRotator cameraRot = UKismetMathLibrary::MakeRotFromX(cameraTangent);
-		FRotator cameraRotWithOffset = FRotator(cameraRot.Pitch, cameraRot.Yaw + 90.0f, cameraRot.Roll);
-
-		cameraBoom->SetWorldLocation(cameraLocation);
-		cameraBoom->SetWorldRotation(cameraRotWithOffset);
+		GetMesh()->SetWorldRotation(playerRotWithOffset);		
 		}
 }
 

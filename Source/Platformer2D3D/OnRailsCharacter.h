@@ -61,18 +61,8 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Input")
 	UInputAction* MoveAction;
 
-	// Reference to spline for camera rig pathing
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "OnRails")
-	TSoftObjectPtr<USplineComponent> cameraSplineRef;
-
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "OnRails")
 	TSoftObjectPtr<USplineComponent> platformSplineRef;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "OnRails")
-	TObjectPtr<USpringArmComponent> cameraBoom;
-
-	UPROPERTY(BlueprintReadWrite,VisibleAnywhere, Category = "OnRails")
-	TObjectPtr<UCameraComponent> followCamera;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "OnRails")
 	ESplineDirection splineDirection;
