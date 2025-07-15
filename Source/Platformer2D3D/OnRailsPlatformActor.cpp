@@ -16,12 +16,8 @@ AOnRailsPlatformActor::AOnRailsPlatformActor()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	railsSpline = CreateDefaultSubobject<USplineComponent>(TEXT("Rails"));
 	platformMeshSpline = CreateDefaultSubobject<USplineComponent>(TEXT("Platform Mesh Spline"));
 	RootComponent = platformMeshSpline;
-	railsSpline->AttachToComponent(platformMeshSpline, FAttachmentTransformRules::KeepRelativeTransform);
-	followCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("Follow Camera"));
-	followCamera->AttachToComponent(platformMeshSpline, FAttachmentTransformRules::KeepRelativeTransform);
 }
 
 // Called when the game starts or when spawned

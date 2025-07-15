@@ -20,6 +20,11 @@
 			"TargetAllowList": [
 				"Editor"
 			]
+		},
+		{
+			"Name": "CineCameraRigs",
+			"Enabled": true			
+			
 		}
 	]
 }

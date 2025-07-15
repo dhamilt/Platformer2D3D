@@ -42,17 +42,11 @@ private:
 	TArray<USplineMeshComponent*> platformMeshCollection;
 
 public:	
-	UPROPERTY(EditAnywhere, Category = "OnRails")
-	TObjectPtr<USplineComponent> railsSpline;
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "OnRails")
 	TObjectPtr<USplineComponent> platformMeshSpline;
 
 	UPROPERTY(EditAnywhere, Category = "OnRails")
 	TObjectPtr<APawn> playerInstance;
-
-	UPROPERTY(EditAnywhere, Category = "OnRails")
-	TObjectPtr<UCameraComponent> followCamera;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "OnRails")
 	TObjectPtr<UStaticMesh> meshInstance;

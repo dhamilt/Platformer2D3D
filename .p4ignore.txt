@@ -1,0 +1,36 @@
+# Ignore Binaries directory
+/Binaries/
+
+# Ignore Intermediate directory
+/Intermediate/
+
+# Ignore Saved directory
+/Saved/
+
+# Ignore Engine directory
+/Engine/
+
+# Ignore DerivedDataCache directory
+/DerivedDataCache/
+
+# Ignore Visual Studio directory
+/.vs/
+
+# Ignore Github directory
+/.github/
+
+# Ignore Git directory
+/.git/
+
+# Ignore Git attirbutes file
+.gitattributes
+
+# Ignore Git ignore file
+.gitignore
+
+# Ignore Visual Studio configuration file
+*.vsconfig
+
+# Ignore solution file(s)
+*.sln
+
